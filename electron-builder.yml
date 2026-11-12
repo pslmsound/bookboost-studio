@@ -1,0 +1,39 @@
+appId: com.bookboost.studio
+productName: BookBoost Studio
+copyright: Private use. Not for resale or redistribution.
+directories:
+  output: release
+  buildResources: build
+asar: true
+files:
+  - dist/**
+  - package.json
+  # Only the SQLite WebAssembly runtime is needed at run time.
+  - "!node_modules/sql.js/dist/sql-asm*"
+  - "!node_modules/sql.js/dist/*debug*"
+  - "!node_modules/sql.js/dist/*browser*"
+  - "!node_modules/sql.js/dist/*inline*"
+  - "!node_modules/sql.js/dist/worker.*"
+  - "!node_modules/sql.js/dist/*.zip"
+  - "!node_modules/sql.js/.devcontainer"
+  - "!node_modules/sql.js/{documentation_index.md,logo.svg,CONTRIBUTING.md,eslint.config.cjs,.jsdoc.config.json,.nojekyll}"
+publish: null
+electronLanguages:
+  - en-US
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  oneClick: true
+  perMachine: false
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: BookBoost Studio
+  runAfterFinish: true
+  deleteAppDataOnUninstall: false
+  artifactName: BookBoost-Studio-Setup-${version}.${ext}
+portable:
+  artifactName: BookBoost-Studio-Portable-${version}.${ext}

@@ -1,0 +1,44 @@
+# Builds and tests BookBoost Studio on a real Windows machine in GitHub Actions,
+# then attaches the installer to the run. Use this if you do not have a Windows PC.
+# Start it from the Actions tab with "Run workflow".
+name: Build Windows installer
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check and build
+        run: npm run build
+      - name: Unit and persistence tests
+        run: npm test
+      - name: End to end smoke test on Windows
+        run: npm run e2e
+      - name: Upload screenshots from the smoke test
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-screenshots
+          path: tests/e2e/screenshots
+          if-no-files-found: ignore
+      - name: Create installer and portable build
+        run: npx electron-builder --win nsis portable --x64
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: BookBoost-Studio-Windows
+          path: release/*.exe
+          if-no-files-found: error

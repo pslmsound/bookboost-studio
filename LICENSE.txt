@@ -1,0 +1,17 @@
+BookBoost Studio
+Private use license
+
+This software was built for private use by its owner and the person it was
+given to. It is not offered for sale, resale or public redistribution.
+
+The owner may install, use, copy and modify it freely for personal and
+business purposes.
+
+The software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the
+authors be liable for any claim, damages or other liability arising from the
+use of the software.
+
+Third party components are listed in THIRD_PARTY_NOTICES.md and remain under
+their own licenses.
