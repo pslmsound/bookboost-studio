@@ -199,10 +199,14 @@ Stated plainly, so nobody relies on something that was not tested.
 - The end to end smoke test passes against the real app in a real Electron window: security posture of the interface, onboarding with validation, persistence across a restart, cover image loading, autosave, AI setup against a local stand-in provider, the consent gate (nothing sent before consent), reviewing and applying an AI draft with history kept, all ten screens with sample data, the minimum window size, campaign tasks, calendar approval, the outreach consent guard, analytics entry validation, and removal of sample data.
 - The Windows application folder was packaged with electron-builder, and the smoke test also passes when run against that packaged application archive (`app.asar`).
 
-**Not verified, because it needs Windows:**
+**Verified on Windows by the GitHub Actions workflow (windows-latest, run 43179017232, 12 Nov 2026):**
 
-- The NSIS installer and portable `.exe` have not been built. That step requires Windows or Wine, and neither was available.
-- The app has not been run on Windows. Windows specific behavior that the tests could not exercise here: the installer and uninstaller, Desktop and Start menu shortcuts, encrypted key storage through DPAPI, native file dialogs for cover, CSV, export and backup files, and display scaling.
+- Install, type check, production build, all 70 tests and the full end to end smoke test pass on Windows.
+- The NSIS installer and the portable build were created successfully.
+
+**Still not verified, because it needs a person at a Windows PC:**
+
+- Nobody has run the installer itself. Untested by hand: installing and uninstalling, Desktop and Start menu shortcuts, encrypted key storage through DPAPI, native file dialogs for cover, CSV, export and backup files, and display scaling.
 - No request was made to a real AI provider. The adapter was tested against simulated responses that follow the Anthropic and OpenAI API formats.
 
-Route B above runs the same automated checks on Windows. After building, please work through `docs/QA_CHECKLIST.md` once on a Windows PC before handing the app over.
+Please work through `docs/QA_CHECKLIST.md` once on a Windows PC before handing the app over.
